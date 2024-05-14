@@ -11,4 +11,7 @@ env/
 
 .vscode/
 
-passwords.txt
+password.txt
+
+
+.gitignore

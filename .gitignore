@@ -11,7 +11,7 @@ env/
 
 .vscode/
 
-password.txt
+password.txt/
 
 
-.gitignore
+media/

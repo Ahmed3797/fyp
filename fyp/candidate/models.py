@@ -32,10 +32,12 @@ class Eduaction(models.Model):
 class CVSubmission(models.Model):
     PENDING = 'Pending'
     APPROVED = 'Approved'
+    REJECT="Reject"
 
     STATUS_CHOICES = [
         (PENDING, 'Pending'),
         (APPROVED, 'Approved'),
+        (REJECT,"Reject")
     ]
 
     applied_candidate=models.ForeignKey(candidate, on_delete=models.CASCADE)

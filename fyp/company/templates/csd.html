@@ -75,8 +75,11 @@
         <!-- CVs container left -->
         <div class="d-flex flex-column justify-content-start align-items-center shadow-sm py-3 cv_container_left col-12 col-md-7"  >
           <!-- cv card starts-->
+          <h3>Appiled Candidates</h3>
+    
+
           {% for candidate in candidates %} 
-          {% if candidate.status != "Approved"  %}
+          {% if candidate.status != "Approved" and candidate.status != "Reject" %}
           <div  class="cv_card col-12 hover-shadow col-sm-11 d-flex justify-content-between p-3 rounded-2 m-2 border border-1" >
             <div>
               <p class="candidate_cv_name m-0 fw-semibold fs-5">
@@ -85,7 +88,7 @@
               <p class="candiate_profession m-0 fs-6">Full stack developer</p>
               <div class="d-flex">
                 <button type="button" class="view_cv_btn text-white p-2 mt-4 me-2 rounded-2 border-0" data-bs-toggle="modal" data-bs-target="#documentModal{{ forloop.counter }}"data-url="{{ candidate.cv.url }}"  >
-                View Cv
+                View CV
                 </button>
                 <form method="POST">
                   {% csrf_token %}
@@ -118,6 +121,7 @@
         <!-- Cvs container right -->
         <div class="d-flex flex-column justify-content-start align-items-center shadow-sm cv_right_container p-2 col-12 col-md-4" >
           <!-- cv list item starts-->
+          <h3>Selected Candidates</h3>
           {% for app_cand in candidates %} 
           {% if app_cand.status == "Approved"  %}
           <div  class="cv_list_item col-12 col-sm-11 p-3 rounded-2 m-2 border border-1"  >
@@ -161,7 +165,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="documentModalLabel">Document Viewer</h5>
+            <h5 class="modal-title" id="documentModalLabel">CV Viewer</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

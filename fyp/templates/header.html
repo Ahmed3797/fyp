@@ -36,7 +36,8 @@ crossorigin="anonymous" />
                 </a>
                 {% endif %}
 
-                {% if ent != True %}  
+                {% if ent != True  %} 
+                 
                 <a href={% url "login" %} class="btn btn-primary mx-2 btn_login">Login</a>
                         <a href={% url "signup" %} class="btn btn-primary mx-2 btn_signup">Sign up</a>
                         {% endif %}

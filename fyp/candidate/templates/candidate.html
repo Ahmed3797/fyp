@@ -136,7 +136,7 @@
                                              <button class="btn btn-danger skill_cancel">Cancel</button>
                                              </div>
                                              </form>
-                                             </div>`
+                                             </div>
                                              
 
 
@@ -306,11 +306,20 @@
                        dataType: 'json',
                        success: function (data) {
                            // Display existing skills
+                           if(data.skill_data.length== 0 )
+                           {
+                            $('.skills_container').append('<div>' +" <h2>Add your skill here<h2> " + '</div>');
+                           }
                            for (var i = 0; i < data.skill_data.length; i++) {
                                $('.skills_container').append('<div>' + data.skill_data[i].name + '</div>');
                            }
-           
+                            
+                             
                            // Display existing education
+                           if(data.education_data.length== 0 )
+                           {
+                            $('.edu_container').append('<div>' +"<h2> Add your Education here<h2> " + '</div>');
+                           }
                            for (var i = 0; i < data.education_data.length; i++) {
                                $('.edu_container').append('<div>' + data.education_data[i].data + '</div>');
                            }

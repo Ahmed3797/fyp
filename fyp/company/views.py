@@ -99,9 +99,10 @@ class View_CVS(TemplateView):
             return redirect("cvs", interview_id)
 
         elif 'rgt' in request.POST:
+            print("I am there")
             candidate_id = request.POST.get("reject")
             candidate = CANDIDATE.objects.get(id=candidate_id)
-            CVSubmission.objects.filter(applied_candidate=candidate, interview=interview).update(status='Pending')
+            CVSubmission.objects.filter(applied_candidate=candidate, interview=interview).update(status='Reject')
             return redirect("cvs", interview_id)
           
        

@@ -1,0 +1,456 @@
+{% extends "main_candidate.html" %}
+{% load static %}
+
+
+{% block css_enter %}
+<link rel="stylesheet" href={% static "css/can.css" %}/>
+
+{% endblock %}
+
+
+    {% block body_page%}
+    {% include "header.html" with ent=True image=image %}
+        
+    
+        <div class="container-fluid">
+            <div class="row">
+                <div class="d-flex justify-content-end mt-3">
+                    <a href={% url "search" %} class=" text-black fw-semibold d-flex"><img src={% static "icons/search_icon.svg" %}  alt="search icon" width="30px"><span class="text-warning">Search Interviews</span></a>
+                </div>
+                <div class="col-12 d-flex align-items-center justify-content-center flex-column p-4 profile_info_cont">
+                    <form method="post" id="imageForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" id="add_profile_image_input" accept="image/*" style="display: none;" name="image">
+                        
+                    </form>
+                    <div class="col-12 d-flex justify-content-center profile_img_container">
+                        <div class="profile_edit_icon">
+                            <img src={% static "icons/icons/user-profile-edit.svg" %} alt="">
+                        </div>
+            
+                
+                        <img src={{data.image.url}}   alt="profile" class="profile_pic ">
+                    </div>
+                    <h2 class="mt-3">{{data.user.name}}</h2>
+                    <div class="w-25" >
+                        <form class="d-flex m-0 align-items-center" >
+                            <input class="mx-2 border-0 w-100 out" contenteditable="true" value="Frontend Developer & UI/UX Expert"></input>
+                            <button type="submit" class="border-0 bg-transparent"  > <img src={% static "images/editBio.png" %}
+                                alt="edit" width="20px" height="20px"></button>
+                        </form>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="nav mb-3 d-flex justify-content-around profile_nav" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active px-3 py-2 text-black" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#profile_about" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="true">About</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link px-3 py-2 text-black" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#applied_interviews" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">Applied Interviews</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link px-3 py-2 text-black" id="pills-contact-tab" data-bs-toggle="pill"
+                    data-bs-target="#candidate_reports" type="button" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">Reports</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="profile_about" role="tabpanel" aria-labelledby="profileabout"
+                tabindex="0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 d-flex flex-column align-items-center justify-content-center mt-5">
+                           
+                            <div class="bio_info col-12 col-sm-9 p-3">
+                            {{candidate.desc}}
+                            </div>
+
+                                <div class="col-12 col-sm-9 d-flex justify-content-end">
+                                    <button class="btn editBtn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalCenter">Edit</button>
+                                </div>
+                                
+                        </div>
+                    </div>
+
+<!-- modal for bio -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Frontend Interview</h5>
+          <button type="button" class="close btn btn-danger fs-5 py-0" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+
+        <div class="modal-body mx-2 bio_info " contenteditable="true" id="editableContent">
+            {{candidate.desc}}
+        </div>
+
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+          <button type="button" class="btn  btn-primary" id="saveBioBtn">Save changes</button>
+        </div>
+        
+    
+
+      </div>
+    </div>
+  </div>
+
+
+<!-- modal for bio ends -->
+
+
+<!-- skills section starts -->
+                    <div class="row">
+                        <div
+                            class="col-12  d-flex flex-md-row flex-column align-items-center justify-content-around mt-2">
+                            <div class="col-md-9 col-12">
+                                <div
+                                    class="d-flex justify-content-between align-items-center px-2 rounded-2 text-white add_skills_header">
+                                    <p style="margin-top: 1rem;"> <b>Skills</b> </p>
+                                    <button class="add_skillBtn ">+</button>
+                                </div>
+                                <div class="bg-white shadow p-4 mt-3 skills_container skills_container">
+                                    
+                                    
+                                    <div class="skill_added_container" style="display: none;">
+                                        <form method="post" id="add_skill_form" >
+                                            {% csrf_token %}
+                                          <input type="text" class="w-100 px-2 py-1  " name="skill_name" placeholder=>
+                                          <input type="hidden" name="skill" value="2">
+                                           <div class="d-flex justify-content-end">
+                                             <button class="btn mx-2 skill_save" type="submit">Save</button>
+                                             <button class="btn btn-danger skill_cancel">Cancel</button>
+                                             </div>
+                                             </form>
+                                             </div>`
+                                             
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- skills section ends -->
+
+
+                    <!-- education section start -->
+                    <div class="row">
+                        <div
+                            class="col-12 d-flex flex-md-row flex-column align-items-center justify-content-around mt-2">
+                            <div class="col-md-9 col-12">
+                                <div
+                                    class="d-flex justify-content-between align-items-center px-2 rounded-2 text-white add_skills_header">
+                                    <p style="margin-top: 1rem;"><b>Education</b> </p>
+                                    <button class="add_EduBtn ">+</button>
+                                </div>
+                                <div class="bg-white shadow p-4 mt-3 edu_container">
+                                    <div class="edu_added_container" style="display: none;">
+                                        <form method="post" id="add_education_form" >
+                                            {% csrf_token %}
+                                          <input type="text" class="w-100 px-2 py-1  " name="education_name" placeholder=>
+                                          <input type="hidden" name="education" value="3">
+                                          <div class="d-flex justify-content-end">
+                                             <button class="btn mx-2 edu_save" type="submit">Save</button>
+                                             <button class="btn btn-danger edu_cancel">Cancel</button>
+                                             </div>
+                                             </form>
+                                             </div>`
+                                             
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- education section ends -->
+                </div>
+            </div>
+
+
+
+            <!-- Applied Interviews starts -->
+            <div class="tab-pane fade" id="applied_interviews" role="tabpanel" aria-labelledby="pills-profile-tab"
+                tabindex="0">
+                <div class="container-fluid mt-5">
+                    <div class="row d-flex justify-content-center flex-wrap">
+
+                  {%  for interview in applied_interviews  %}
+                  
+                  {% if interview.interview  not in inter %}
+                 
+                 
+                
+              
+                        <div class="card m-1 p-0 shadow" style="width: 18rem;">
+                            <img src= {% if interview.interview.image%}{{interview.interview.image.url}}{% endif%} width="300px" height="150px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ interview.interview.name }}</h5>
+                                <p class="card-text fw-semibold">Approval: <span
+                                        class="text-warning fw-normal">{{interview.status}}</span></p>
+                                        
+                                        
+                                   {% load tz %}    
+                                        {% if interview.interview.schedulded and interview.status == "Approved" and current_date < interview.interview.end_date|date %}
+    
+                                        {% if interview.interview.is_greater  %}
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <p>Start Date: {{ interview.interview.start_date }}</p>
+                                            
+                                            {% if interview.interview.is_greater_enddate == False  %}
+                                            <p>Due: {{ interview.interview.end_date }}</p>
+                                            <a href="{% url "interview" interview.interview.id %}" class="btn btn-primary px-2">Start</a>
+                                            {% endif %}
+                                        </div>
+                                   
+                                    {% else %}
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p>Start Date: {{ interview.interview.start_date }}</p>
+                                        
+                      
+                                    </div>
+                                    {% endif %}
+
+                                    {% elif interview.interview.schedulded != True  %}
+                                    <p> Waiting for schedule </p>
+                                     
+                                    {% else %}
+                                    <p>Interview is closed for you  </p>
+
+                                    {% endif %}
+                                     
+                                
+                            </div>
+                        </div>
+                        {% endif%}
+                        {% endfor%}
+
+
+                        
+                        
+                      
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Interview Reports -->
+            <div class="tab-pane fade" id="candidate_reports" role="tabpanel" aria-labelledby="pills-contact-tab"
+            tabindex="0">
+            <div class="container-fluid mt-5">
+                <div class="row d-flex justify-content-center flex-wrap">
+                    
+                    {% for report in reports %}
+                        <div class="card m-1 p-0 shadow" style="width: 18rem;">
+                            <img src={{report.interview.image.url}} width="300px" height="150px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{report.interview.name}}</h5>
+                                {% comment %} <p class="card-text fw-semibold">Status: <span
+                                        class="text-warning fw-normal text-success">Selected</span></p> {% endcomment %}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href={% url "reports" report.id %} class="btn btn-primary px-2 ">View Report</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                       
+            
+                    </div>
+                </div>
+            </div>
+
+            <!-- interview reports end -->
+           
+        </div>
+        {% endblock %}
+
+         {% block Scripts%}
+
+         
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+         <script src="static/javascript/candidate.js"></script>
+
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+         crossorigin="anonymous"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script>
+
+
+               $(document).ready(function () {
+                   // Fetch Initial Data
+                   $.ajax({
+                       type: 'GET',
+                       url: '{% url "initial_data" %}',
+                       dataType: 'json',
+                       success: function (data) {
+                           // Display existing skills
+                           for (var i = 0; i < data.skill_data.length; i++) {
+                               $('.skills_container').append('<div>' + data.skill_data[i].name + '</div>');
+                           }
+           
+                           // Display existing education
+                           for (var i = 0; i < data.education_data.length; i++) {
+                               $('.edu_container').append('<div>' + data.education_data[i].data + '</div>');
+                           }
+                           
+                           $('.bio_info').text(data.obj);
+                        
+                        
+                       },
+                       error: function () {
+                           alert('Failed to fetch initial data');
+                       }
+                   });
+
+
+
+                   $('#add_skill_form').submit(function (e) {
+                    e.preventDefault();
+        
+                    var skillName = $('[name="skill_name"]').val();
+                    var skillclose=$('.skill_cancel')
+                
+        
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "add_skill" %}',
+                        data: {
+                            csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(),
+                            skill_name: skillName,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.success) {
+                                // Skill added successfully, update the UI
+                                $('.skills_container').append('<div>' + skillName + '</div>');
+                                // Clear the input field
+                                $('[name="skill_name"]').val('');
+                                alert('Skill added successfully');
+                                skillclose.click()
+                            } else {
+                                alert('Failed to add skill: ' + data.message);
+                            }
+                        },
+                        error: function () {
+                            alert('Failed to submit the form');
+                        }
+                    });
+                });
+
+
+
+                $('#add_education_form').submit(function (e) {
+                    e.preventDefault();
+        
+                    var eduacationName = $('[name="education_name"]').val();
+                    var educlose=$('.edu_cancel')
+                    
+        
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "add_education" %}',
+                        data: {
+                            csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(),
+                            education_name: eduacationName,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.success) {
+                                // Skill added successfully, update the UI
+                                $('.edu_container').append('<div>' +eduacationName + '</div>');
+                                // Clear the input field
+                                $('[name="education_name"]').val('');
+                                alert('Education added successfully');
+                                educlose.click()
+                            } else {
+                                alert('Failed to add Education: ' + data.message);
+                            }
+                        },
+                        error: function () {
+                            alert('Failed to submit the form');
+                        }
+                    });
+                });
+
+            
+                $('#add_profile_image_input').change(function() {
+                    var formData = new FormData($('#imageForm')[0]);
+                    formData.append('cmp', {{ candidate.id }}); // Add company id to formData
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "save_cand_image" %}',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            // Handle success response
+                            $('.profile_pic').attr('src', response.image_url);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error response
+                            console.log(error);
+                        }
+                    });
+                });
+
+                $('#editIcon').click(function() {
+                    $('#companyName').focus();
+                });
+            
+               
+                  
+                  $('#saveBioBtn').click(function() {
+            
+                    var editedContent = $('#editableContent').text(); // Get the text content of the editable div
+                    var candidateId = {{ candidate.id }};
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "save_cand_bio" %}', // Update this URL with your actual endpoint
+                        data: {
+                            bio: editedContent, // Send the edited content to the server
+                            id:candidateId
+                        },
+                        success: function(response) {
+                            // Handle success response
+                         
+                            $('.bio_info').text(editedContent);
+                            $('.close').click();
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error response
+                            console.log(error);
+                        }
+                    });
+         
+                });
+    
+                   
+               });
+                
+
+           </script>
+        {% endblock %}
+    

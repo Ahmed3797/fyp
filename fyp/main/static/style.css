@@ -1,0 +1,194 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Mynerve&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root{
+    --clr-bg-primary:#111736;
+    --clr-bg-accent:#ECFAFF;
+    --clr-bg-secondary:#2A3784;
+    --clr-f-primary:black;
+    --clr-f-secondary:white;
+    --clr-f-accent1:#111736;
+    --clr-f-accent2:grey;
+    --ff: 'Kaushan Script', cursive, san-serif;
+}
+/* font-family: 'Kaushan Script', cursive;
+font-family: 'Mynerve', cursive; */
+
+
+
+.btn_login,.btn_signup{
+    background-color: var(--clr-bg-secondary);
+}
+
+body{
+    overflow-x: hidden;
+}
+/* =============================== */
+/* hero section styling */
+/* ============================= */
+.hero_section{
+    background: linear-gradient(to bottom,rgba(133, 193, 242, 0.772),white), url('/assets/hero-bg1.png') no-repeat;
+    min-height: 80vh;
+    max-height: auto ;
+    /* background: linear-gradient(to bottom, rgb(211, 211, 251), white); */
+
+}
+
+.logo{
+    font-family: var(--ff) ;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.hero_content{
+    min-height: 80vh;
+    max-height: auto;
+}
+
+.hero_info_container h1{
+    font-family: var(--ff);
+   font-size: 3rem;
+
+}
+
+.hero_info_container p{
+    font-size: .9rem;
+}
+.hero_img_container{
+    margin-top: 2rem !important;
+    position: relative;
+    
+}
+.hero_img_container img{
+width: 100%;
+position: relative;
+}
+
+.hero_img_container::before{
+    content: '';
+    height: 120px;
+    width: 120px;
+    border: 5px dotted orange;
+    left: -50px;
+    bottom: -50px;
+    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+    animation: squareanimate 7s linear infinite;
+
+    }
+
+    
+    .hero_img_container::after{
+    content: '';
+    height: 100px;
+    width: 100px;
+    border: 5px dotted orange;
+    right: 50px;
+    top: -30px;
+    position: absolute;
+    z-index: 1;
+    transform: rotate(45deg);
+    animation: squareanimate 5s linear infinite;
+   
+    }
+
+
+   
+    @keyframes squareanimate {
+        0%{
+            transform: rotate(90deg);
+            
+        }
+       
+
+        100%{
+            transform: rotate(360deg);
+            /* border: 5px dotted orange; */
+          
+        }
+    }
+/* about section */
+
+.about_section .about_right h3{
+    font-family: var(--ff);
+    font-size: 2.5rem;
+
+}
+
+.about_section .about_right p{
+  border: dotted var(--clr-bg-primary) !important;
+  
+
+}
+
+
+/* services section */
+
+.services_section{
+    background: linear-gradient(to bottom,rgb(255, 255, 255),rgba(255, 255, 255, 0.74),rgb(255, 255, 255)), url('/assets/services-bg.png') no-repeat;
+    
+    min-height: 80vh;
+    max-height: auto ;
+}
+
+.services_section .services_heading{
+    font-family:var(--ff);
+    font-size: 2.5rem;
+}
+
+.services_section .row div{
+    border: solid var(--clr-bg-primary) !important;
+}
+
+.services_section .row div h4{
+    font-family: var(--ff);
+}
+
+
+/* testimonial section */
+
+
+.testimonial_section{
+    background:linear-gradient(to bottom,rgba(133, 195, 242, 0.116),rgba(255, 255, 255, 0.126)), url('/assets/testimonial-bg2.png') no-repeat;
+    min-height: 100vh;
+    max-height: auto ;
+    background-size: cover;
+  
+}
+.testimonial_section h3{
+    font-family: var(--ff);
+    font-size: 2.5rem;
+}
+
+.testimonial{
+    min-height: 70vh;
+    max-height: auto;
+}
+.testimonial .user_pic{
+
+    width: 100px;
+    border-radius: 50%;
+    aspect-ratio: 1.01/1;
+}
+.testimonial div{
+    border: 2px solid var(--clr-bg-primary) !important;
+   
+   
+}
+.test_control_left,.test_control_right{
+    width: 5%;
+    cursor: pointer;
+    filter: drop-shadow(0px 2px 3px rgb(135, 135, 135));
+}
+
+
+
+
+

@@ -1,0 +1,14 @@
+# Ignore database files
+db.sqlite3
+
+# Ignore static files
+staticfiles/
+
+# Ignore environment variables file
+.env
+
+env/
+
+.vscode/
+
+passwords.txt

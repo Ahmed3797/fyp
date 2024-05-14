@@ -1,0 +1,88 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lora&family=Mynerve&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --clr-bg-primary:#111736;
+    --clr-bg-secondary:#2A3784;
+    --clr-bg-accent:#ECFAFF;
+    --clr-f-primary:black;
+    --clr-f-secondary:white;
+    --clr-f-accent1:#111736;
+    --clr-f-accent2:grey;
+    --ff: 'Kaushan Script', cursive, san-serif;
+}
+
+body{
+    background:linear-gradient(to bottom,rgb(68, 191, 248),white,rgb(255, 255, 255));
+}
+
+ .profile_pic{
+    min-width: 140px;
+    max-width: 10%;
+    border-radius: 50% !important;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    
+}
+
+.profile_img_container{
+    position: relative;
+    cursor: pointer;
+}
+.profile_edit_icon{
+    width: 30px;
+    height: 30px;
+    background-color: #2A3784;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    left: 55px;
+    margin: 0 auto;
+    display: none;
+}
+
+.profile_info_cont h2{
+    color: var(--clr-f-primary);
+    font-size: clamp(1rem,1vw + .9rem,3rem);
+}
+
+.profile_info_cont p{
+    color: var(--clr-f-accent2);
+    margin-top: -.5rem;
+    font-size: clamp(.8rem,1vw + .3rem,3rem);
+}
+.profile_info_cont img{
+    color: var(--clr-f-accent2);
+    margin-top: -.5rem;
+}
+
+
+.profile_nav {
+    background: var(--clr-bg-secondary);
+    
+}
+
+.profile_nav .active{
+    color: rgb(204, 237, 255) !important;
+    line-height: -5;
+}
+
+
+/* .bio_info{
+    background-color: var(--clr-bg-accent);
+    border-bottom: 1px solid var(--clr-bg-primary) ;
+    color: var(--clr-f-accent1);
+} */
+
+
+
+.imgs
+{
+    width: 100%;
+    height: 130px;
+
+}

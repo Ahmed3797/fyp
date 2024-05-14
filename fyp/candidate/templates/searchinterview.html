@@ -1,0 +1,126 @@
+{% extends "main_candidate.html" %}
+{% load static %}
+{% block css_enter %}
+
+<link rel="stylesheet" href={% static "css/searchinterview.css" %}/>
+{% endblock css_enter %}
+
+
+{% block body_page %}
+{% include "header.html" with ent=True image=image %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <form class="d-flex justify-content-center align-content-center p-2 py-4 w-100">
+                            <input class="search_interview col-10 col-sm-6 border-0 p-2 rounded-2  " type="text"
+                                name="search" id="search" placeholder="Search">
+                            <button class="btn btn-secondary p-2 mx-1 rounded-2 border-0">Search</button>
+                    </div>
+                    </form>
+                </div>
+                <div class="container">
+                    <p class="fw-semibold">Search results: <span class=" fw-normal">{{  interviews|length }}</span></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" d-flex flex-column justify-content-center align-items-center p-2">
+
+                    <!-- interview card -->
+                    {% for interview in interviews %}
+                    <div class="interview_card col-12 col-sm-8 d-flex justify-content-between p-3 rounded-2 m-2 border border-1">
+                        <div>
+                            <p class="interview_name m-0 fw-semibold fs-5">{{interview.name}}</p>
+                            <p class="interview_company m-0 fs-6">{{interview.company.user.name}}</p>
+                            {% if interview.applied == False  %}
+                            <button type="button" class=" view_interview_detail_btn text-white p-2 mt-4 rounded-2 border-0" data-toggle="modal" data-target="#exampleModalCenter{{ interview.id }}">View
+                                Details</button>
+                            {% else %}
+                            <p class="fw-bold pt-2 mt-2 text-success  fs-6"> Applied Already </p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <img src={% if interview.company.image  %}{{interview.company.image.url}}{% else %} {% static "images/about-bg.webp" %}{% endif %}  alt="company logo" class="interview_company_logo">
+                        </div>
+                    </div>
+                    
+                    
+
+                     <!-- interview card -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter{{ interview.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Frontend Interview</h5>
+          <button type="button" class="close btn btn-danger fs-5 py-0" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {{ interview.description }} 
+        </div>
+<div class="d-flex align-items-center flex-column my-2">
+     <img class="drop_cv" width="100px" src={% static "images/drop.png" %} "images/drop.png" alt="dropcv">
+
+
+        <button class="btn text-white drop_cv_btn my-2">Drop your Cv</button>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% comment %} {{ cv_submission_form }} {% endcomment %}
+            <input type="hidden" value={{ interview.id }} name="interview_id" />
+            <input type="file" name="cv" accept=".pdf">
+            <button type="submit">Submit CV</button>
+          </form>
+</div>
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+          
+                     <!-- interview card -->
+                </div>
+            </div>
+            
+            <div class="pagination d-flex justify-content-center pt-3 text-center  ">
+                <span class="step-links">
+                    {% if interviews.has_previous %}
+                        <a href="?page=1" class="btn btn-primary">&laquo; first</a>
+                        <a  class="btn btn-dark" href="?page={{ interviews.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current btn btn-secondary">
+                        Page {{ interviews.number }} of {{ interviews.paginator.num_pages }}.
+                    </span>
+            
+                    {% if interviews.has_next %}
+                        <a class="btn btn-danger" href="?page={{ interviews.next_page_number }}">next</a>
+                        <a  class="btn btn-danger" href="?page={{ interviews.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+
+            {% endblock body_page %}
+            {% block Scripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script>
+                const drop_cv_input=document.querySelector(".drop_cv_input");
+                const drop_cv_btn=document.querySelector(".drop_cv_btn");
+
+                drop_cv_btn.addEventListener('click',()=>{
+                    drop_cv_input.click()
+                })
+            </script>
+            {% endblock Scripts %}
+            

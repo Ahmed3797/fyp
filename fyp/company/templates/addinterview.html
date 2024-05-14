@@ -1,0 +1,183 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href={% static "css/addinterview.css" %} />
+    <title>Create Interview Page</title>
+  </head>
+
+  <body>
+    <div id="component" class="container-fluid">
+      <div class="px-1 row">
+        {% include "header.html" with ent=True image=image %}
+
+        <div class="row">
+          <div class="col-11 mx-auto align-items-center">
+            <h2>Create Interview</h2>
+            <form method="post"   id="interview-form"   enctype="multipart/form-data"   >
+              {% csrf_token %}
+
+              <div>
+                <label for="{{ interview_form.title.id_for_label }}" >Title:</label
+                >
+                {{ interview_form.name }} 
+                {{ interview_form.name.errors }}
+                <br />
+              </div>
+
+              <div>
+                <label for="{{ interview_form.image.image_for_label }}" >Image:</label >
+                {{ interview_form.image }} 
+                {{ interview_form.image.errors }}
+                <br />
+              </div>
+
+              <div>
+                <label for="{{ interview_form.description.id_for_label }}"
+                  >Description:</label
+                >
+                {{ interview_form.description }} 
+                {{ interview_form.name.description }}
+                <br />
+              </div>
+
+              <div>
+                <label
+                  for="{{ interview_form.application_end_date.id_for_label }}"
+                  >Applications End Date:</label
+                >
+                <input
+                  type="date"
+                  name="application_end_date"
+                  value=""
+                  required=""
+                  id="id_application_end_date"
+                />
+                {% comment %} {{ interview_form.application_end_date }} {%
+                endcomment %} {% comment %}
+                <input
+                  type="text"
+                  class="form-control"
+                  id="application_end_date"
+                  name="interview_end_date"
+                  placeholder="YYYY-MM-DD"
+                  pattern="\d{4}-\d{2}-\d{2}"
+                />
+                {% endcomment %} 
+                {{ interview_form.application_end_date.errors   }}
+                <br />
+              </div>
+
+              <hr />
+              <div class="w-100 d-flex justify-content-end bg-primary rounded p-1" >
+                <button type="button" class="btn btn-primary" onclick="addQuestion()" >
+                  Add Question
+                </button>
+              </div>
+              <div id="question-formset">
+                {{ formset.management_form }} 
+                {% for form in formset %}
+                <div class="bg-white border mt-2 mb-2 shadow rounded p-2">
+                  <div class="form-row mb-2">
+                    <div class="col">
+                      <label for="{{ form.question_text.id_for_label }}"  >Question:</label   >
+                      {{ form.question_text }} 
+                      {{ form.question_text.errors }}
+                    </div>
+                    <div class="col">
+                      <label for="{{ form.answer.id_for_label }}"
+                        >Qeustion Image if have</label
+                      >
+                      {{ form.image }} 
+                      {{ form.image.errors }}
+                    </div>
+                    <div class="col">
+                      <label for="{{ form.answer.id_for_label }}"  >Answer:</label >
+                      {{ form.answer }} 
+                      {{ form.answer.errors }}
+                    </div>
+
+                    <div class="col">
+                      <div class="d-flex justify-content-start">
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          onclick="deleteQuestion(this)"
+                        >
+                          Delete Question
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+
+              <div class="d-flex justify-content-center m-4">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  Apply
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {% include "footer.html" %} 
+
+    <script>
+      function addQuestion() {
+        var formset = document.getElementById("question-formset");
+        var totalFormsInput = document.getElementById("id_form-TOTAL_FORMS");
+        var totalForms = parseInt(totalFormsInput.value);
+
+        // Create a new div for the question form
+        var newFormDiv = document.createElement("div");
+        newFormDiv.className = "question-form";
+
+        // Add the HTML structure for the question form
+        newFormDiv.innerHTML = `
+                <div class="bg-white border mt-2 mb-2 shadow rounded p-2  ">
+                <label for="id_form-${totalForms}-question_text">Question Text:</label>
+                <input type="text" name="form-${totalForms}-question_text" id="id_form-${totalForms}-question_text">
+
+                 <label for="id-form-${totalForms}-image">Qeustion Image if have</label>
+                <input type="file" name="form-${totalForms}-image" accept="image/*" id="id_form-${totalForms}-image">
+                <label for="id_form-${totalForms}-answer">Answer:</label>
+                <textarea type="text" name="form-${totalForms}-answer" id="id_form-${totalForms}-answer" rows="10">
+                </textarea>
+
+                
+                    <button type="button" class="btn btn-danger " onclick="deleteQuestion(this)">Delete Question</button>
+                    
+            </div>
+            `;
+
+        formset.appendChild(newFormDiv);
+        totalFormsInput.value = totalForms + 1;
+      }
+
+      function deleteQuestion(button) {
+        var formset = document.getElementById("question-formset");
+        var totalFormsInput = document.getElementById("id_form-TOTAL_FORMS");
+        var totalForms = parseInt(totalFormsInput.value);
+
+        if (totalForms > 1) {
+          button.parentElement.remove();
+          totalFormsInput.value = totalForms - 1;
+        }
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"   crossorigin="anonymous" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"  integrity="sha384-9Nq0qa2I5kgWGq7M6k7zZukbdJqBOVHpU8JQh1rNOCT8pO2p2eAtKpOzb3aiQ7Ve"   crossorigin="anonymous" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCxFb1CZbKE16xDTtZrsQD72eq4s0D1u7PhshvGL06" crossorigin="anonymous" ></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{% load static %}
+<link rel="stylesheet" href={% static "css/footer.css" %}/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+crossorigin="anonymous" />
+
+
+<footer class="container-fluid mt-3">
+    <div class="row justify-content-between">
+        <div class="col-12 col-sm-5 p-4">
+            <h1 class="text-white">Interes Viewers</h1>
+            <p class="text-white">Copyright &copy; claimed 2023</p>
+        </div>
+        <div class="col-12 col-sm-5 d-flex justify-content-end">
+            <img src={% static "images/instagram.svg" %}     width="30" alt="instagram" />
+            <img src={% static "images/facebook.svg" %}      class="mx-3" width="30" alt="facebook" />
+            <img src={% static "images/linkedin.svg" %}     width="30" alt="linkedin" />
+        </div>
+    </div>
+</footer>

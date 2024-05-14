@@ -1,0 +1,29 @@
+.loginBtn,.signupBtn{
+    background-color: var(--clr-bg-secondary) !important;
+    border: none !important;
+}
+.loginBtn:hover,.signupBtn:hover{
+    background-color: var(--clr-bg-primary) !important;
+}
+
+.nav_item{
+    position: relative;
+}
+.nav_item::after{
+content: '';
+position: absolute;
+width: 0%;
+top: 35px;
+left: 0;
+background-color: var(--clr-bg-secondary);
+height: 3px;
+border-radius: 10px;
+}
+.nav_item:hover::after{
+width: 100%;
+transition: .5s;
+}.loggedInUserProfileIcon{
+    border-radius: 50%;
+    border: 1px solid black;
+    aspect-ratio: 1/1;
+}

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lora&family=Mynerve&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#component{
+    min-height: 100vh;
+    max-height:auto;
+    width:100%;
+    background:linear-gradient(to bottom,rgb(68, 191, 248),white,rgb(255, 255, 255));
+    /* background-color:purple; */
+    
+    
+
+}
+
+input{
+    width: 100%;
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 10px;
+    border: none;
+    outline: none;    
+}
+
+textarea
+{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px; 
+    border-radius: 5px;
+    background-color: #ECFAFF; 
+    border: 1px solid slategray;
+}
+
+.bds,#component{
+    
+    /* background-color: pink; */
+}
+
+body{
+    /* background:linear-gradient(to bottom,rgb(68, 191, 248),white,rgb(255, 255, 255)); */
+}
+
+input
+{
+    border: 1px solid slategray;
+}
+
+/* input[type="text"]:hover
+{
+
+background-color: rgb(158, 213, 212);
+} */

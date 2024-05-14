@@ -1,0 +1,123 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --primary-color: rgb(4, 4, 106);
+
+}
+.container{
+    /* background-color: rgb(198, 233, 234); */
+    border: 2px solid rgb(6, 6, 96);
+    width:60%;
+    margin: .5rem auto;
+    padding: 1rem;
+}
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.logo{
+    text-align: center;
+    color: var(--primary-color);
+    font-family: "Kaushan Script", cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    font-style: normal;
+}
+.iterview_name{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    margin: .3rem;
+    border-radius: 5px;
+    flex-wrap: wrap;
+}
+.candidate_header,.company_header{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+h2{
+   
+    background-color: var(--primary-color);
+    padding: .5rem ;
+    border-radius: 5px;
+    margin: .5rem;
+    color: white;
+}
+.report_analysis_cont{
+    /* background: pink; */
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin: .3rem;
+    flex-wrap: wrap;
+}
+.report_analysis_cont div{
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.trust_fact,.total_points,.result{
+    padding: 0 1rem;
+    text-align: right;
+    margin: .4rem 0;
+}
+
+.tech_analysis_header,h4{
+    /* background: aqua; */
+    padding: 1rem;
+    margin: .3rem;
+}
+.tech_analysis_header{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.tech_analysis_questions_points{
+    /* background-color: beige; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px,200px));
+    justify-content: space-between;
+    padding: 1rem;
+    margin: .3rem;
+    height: 200px;
+    overflow-y:auto ;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;;
+}
+.result_container h2,.result_container div{
+    /* padding: 1rem; */
+    margin: .3rem;
+}
+.result_container {
+    font-size: .9rem;
+}
+.result{
+    background: rgb(141, 254, 207);
+    padding: .5rem;
+    margin: .5rem 0;
+    border-radius: 5px;
+    font-size: 1.4rem;
+}
+
+@media screen and (max-width:600px) {
+    .container{
+      
+        border: 2px solid rgb(6, 6, 96);
+        width:90%;
+      
+    }
+}

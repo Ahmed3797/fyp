@@ -1,0 +1,141 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lora&family=Mynerve&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --clr-bg-primary:#111736;
+    --clr-bg-secondary:#2A3784;
+    --clr-bg-accent:#ECFAFF;
+    --clr-f-primary:black;
+    --clr-f-secondary:white;
+    --clr-f-accent1:#111736;
+    --clr-f-accent2:grey;
+    --ff: 'Kaushan Script', cursive, san-serif;
+}
+
+.logo{
+    font-family: var(--ff);
+}
+
+
+
+
+
+.profile_info_cont .profile_pic{
+    min-width: 140px;
+    max-width: 10%;
+    border-radius: 50% !important;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    
+}
+
+
+.profile_img_container{
+    position: relative;
+    cursor: pointer;
+}
+.profile_pic{
+    transition: opacity .3s;
+}
+.profile_edit_icon{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    margin: 0 auto;
+    display: none;
+}
+
+
+.profile_info_cont h2{
+    color: var(--clr-f-primary);
+    font-size: clamp(1rem,1vw + .9rem,3rem);
+}
+
+.profile_info_cont p{
+    color: var(--clr-f-accent2);
+    margin-top: -.5rem;
+    font-size: clamp(.8rem,1vw + .3rem,3rem);
+}
+.profile_info_cont img{
+    color: var(--clr-f-accent2);
+    margin-top: -.5rem;
+}
+
+
+.profile_nav {
+    background: linear-gradient(to bottom, white, rgba(116, 180, 254, 0.445));
+}
+
+.profile_nav .active{
+    border-bottom: 3px solid rgb(0, 0, 91) ;
+    line-height: -5;
+}
+
+
+.bio_info{
+    background-color: var(--clr-bg-accent);
+    border-bottom: 1px solid var(--clr-bg-primary) ;
+    color: var(--clr-f-accent1);
+}
+.editBtn,.save_new_eduBtn,.save_new_skillBtn,.saveBioBtn{
+    background-color: var(--clr-bg-secondary);
+    color: white !important;
+}
+.editBtn:hover,.save_new_eduBtn:hover,.save_new_skillBtn:hover,.saveBioBtn:hover{
+    background-color: var(--clr-bg-primary);
+}
+
+.add_skills_header{
+    background-color: var(--clr-bg-secondary);
+}
+.add_skills_header .add_skillBtn, .add_EduBtn{
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    
+    color: white;
+}
+
+
+.skills_container div ,.edu_container div{
+    background: var(--clr-bg-accent);
+    /* background-color: #AAD2DE; */
+    padding: .4rem;
+    margin: .5rem;
+    border-radius: .2rem;
+    
+}
+
+.edu_container div{
+    background: var(--clr-bg-accent);
+
+}
+
+.add_new_skill_input_container{
+    animation: showcontainer .3s linear ;
+}
+.add_new_edu_input_container{
+    animation: showcontainer .3s linear ;
+}
+
+@keyframes showcontainer{
+    
+    from{
+        /* scale: 0.7; */
+        transform: translateY(-50px);
+    }
+    to{
+        /* scale: 1; */
+        transform: translateY(0px);
+    }
+}
+.skills_container,.edu_container{
+    height: auto;
+    transition: height 3000ms;
+}

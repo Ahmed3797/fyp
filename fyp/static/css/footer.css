@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Mynerve&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+footer{
+    background:#111736;
+}
+footer h1
+{
+    font-family: 'Kaushan Script', cursive, san-serif;;
+}

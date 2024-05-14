@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --clr-bg-secondary:#2A3784;
+}
+.schedule_container{
+    margin-top: 1rem ;
+    align-items: center ;
+
+  
+
+}
+.schedule_container p{
+    font-weight: bold;
+    margin: auto 0;
+    margin-right:  1rem ;
+    font-size: 1.2rem;
+    
+    }
+.cvs_container{
+    background:aliceblue;
+    padding: 1rem;
+    flex-wrap: wrap-reverse;
+    border-radius: 15px;
+    
+}
+
+
+.cv_container_left{
+    background: white;
+    
+    height: 450px;
+    overflow-y: auto;
+    border-radius: 15px;
+    
+}
+.cv_card{
+    background: aliceblue;
+    flex-wrap: wrap-reverse;
+}
+.cv_card:hover{
+    box-shadow: 1px 0px 10px 3px rgb(197, 197, 197);
+    scale: 1.03;
+    transition: .3s;
+}
+
+.cv_card img{
+    border-radius: 50% ;
+    aspect-ratio: 1/1;
+}
+
+.view_cv_btn{
+    background:var(--clr-bg-secondary);
+}
+
+.cv_right_container{
+    background: white;
+    height: 450px;
+    overflow-y: auto;
+    border-radius: 15px;
+    
+}
+
+.cv_list_item{
+    background: var(--clr-bg-secondary);
+    color: white;
+}
+.cand_pic_cont{
+    align-items: end;
+    
+}
+.cand_pic_cont img{
+    width: 50px;
+    height: 50px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+
+}
+.cv_list_item:hover{
+    scale: 1.1;
+    transition: .3s;
+}
+.rmbts
+{
+    height: 40px;
+    width: 30px;
+}

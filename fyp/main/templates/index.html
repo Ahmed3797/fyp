@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interes Viewers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
+    <link rel="stylesheet" href={% static "style.css" %}/>
+  </head>
+
+  <body>
+    <!-- Hero section start -->
+    <div class="container-fluid hero_section">
+      {% include "header.html" with ent=False image=image %}
+      <div class="container hero_container">
+        <div class="row align-items-center justify-content-between hero_content" >
+          <div class="col-lg-6 hero_info_container px-4 mt-4 d-flex flex-column align-items-start justify-content-center" >
+            <h1>Interes Viewers</h1>
+            <p>
+              This is the description of our company. Lorem ipsum dolor sit,
+              amet consectetur adipisicing elit. Eligendi, vero. Lorem ipsum
+              dolor sit amet consectetur adipisicing elit. Nihil, temporibus.
+            </p>
+          </div>
+          <div class="col-lg-5 hero_img_container">
+            <img src={% static "images/hero-img2.webp" %} width="200"
+            class="rounded-5" alt="hero-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Hero-section end -->
+
+    <!-- About section start -->
+    <div class="container" id="about">
+      <div
+        class="row align-items-center flex-column-reverse flex-lg-row justify-content-between about_section"
+      >
+        <div class="col-lg-6 about_left">
+          <img src= {% static "images/about-bg2.png" %} class="img-fluid" alt="
+          about-img" />
+        </div>
+        <div class="col-lg-6 about_right">
+          <h3>About</h3>
+          <p class="border rounded-5 p-4 border-dotted">
+            hello Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Delectus harum dolore eius fuga pariatur quam mollitia quas libero
+            illum veniam tempora suscipit, consequatur, accusamus aperiam
+            voluptatum nam? Saepe, autem placeat? Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Cum reprehenderit fugit, veniam
+            repudiandae adipisci aut aliquid maiores molestiae ipsam similique!
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- about section end -->
+
+    <!-- Services section start -->
+    <div class="container-fluid services_section my-4" id="services">
+      <div class="row my-5">
+        <h3 class="text-center py-4 services_heading">Services</h3>
+      </div>
+      <div class="row justify-content-evenly mx-2">
+        <div class="col-sm-5 my-4 border border-5 rounded-4 p-4 services_toright_animate" >
+          <h4>Service 1</h4>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto atque
+          voluptas quas facilis aspernatur voluptates, odit vel alias blanditiis
+          ipsum! Explicabo perferendis obcaecati voluptas nesciunt? Accusamus
+          laboriosam, rerum expedita harum, blanditiis minima enim placeat modi,
+          provident earum ex. Recusandae, modi.
+        </div>
+        <div  class="col-sm-5 my-4 border border-5 rounded-4 p-4 services_toleft_animate">
+          <h4>Service 2</h4>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis atque
+          laudantium libero veritatis ex, quidem eos eveniet, maxime doloribus
+          consequuntur minus commodi voluptatibus ipsum provident modi neque ut
+          obcaecati dolores possimus iste qui. Repellendus corporis pariatur
+          optio est dolor sunt.
+        </div>
+      </div>
+      <div class="row justify-content-evenly mx-2 services_left">
+        <div class="col-sm-5 my-4 border border-5 rounded-4 p-4 services_toright_animate"  >
+          <h4>Service 3</h4>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto atque
+          voluptas quas facilis aspernatur voluptates, odit vel alias blanditiis
+          ipsum! Explicabo perferendis obcaecati voluptas nesciunt? Accusamus
+          laboriosam, rerum expedita harum, blanditiis minima enim placeat modi,
+          provident earum ex. Recusandae, modi.
+        </div>
+        <div class="col-sm-5 my-4 border border-5 rounded-4 p-4 services_toleft_animate" >
+          <h4>Service 4</h4>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis atque
+          laudantium libero veritatis ex, quidem eos eveniet, maxime doloribus
+          consequuntur minus commodi voluptatibus ipsum provident modi neque ut
+          obcaecati dolores possimus iste qui. Repellendus corporis pariatur
+          optio est dolor sunt.
+        </div>
+      </div>
+    </div>
+    <!-- services section end -->
+    <!-- testimonial section start -->
+    <div class="container-fluid d-flex align-items-center testimonial_section">
+      <div class="row justify-content-center">
+        <h3 class="text-center mt-3">Testimonials</h3>
+        <div class="col-12 col-sm-10 d-flex align-items-center testimonial">
+          <img src={% static "images/control-left.svg" %}
+          class="test_control_left mx-2" alt="left" />
+          <div class="border col-10 p-4 rounded-4 d-flex flex-column overflow-hidden justify-content-center align-items-center h-75 h-sm-50"   >
+            <img src={% static "images/user1.jpg" %} class="user_pic" alt="user pic" />
+            <h4 class="testimonial_name"></h4>
+            <p class="text-sm-center overflow-auto" id="testimonial_para"></p>
+          </div>
+          <img src={% static "images/right.svg" %} class="test_control_right mx-2" alt="right" />
+        </div>
+      </div>
+    </div>
+
+    <!-- testimonial section end -->
+    {% include "footer.html" %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" ></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"  crossorigin="anonymous">
+    </script>
+    <script src={% static "javascript/main.js" %}></script>
+  </body>
+</html>

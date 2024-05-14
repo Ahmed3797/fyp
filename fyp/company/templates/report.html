@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CandidateName | Report</title>
+    <link rel="stylesheet" href={% static "css/report.css" %} />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="logo">Virtual Interviewer</h1>
+      <h3 class="iterview_name">{{ report.interview.name|upper }} REPORT</h3>
+
+      <div class="header">
+        <div class="candidate_header">
+          <p><b>Candidate Name:</b> <span>{{ report.user.name }}</span></p>
+          <p><b>Interview:</b> <span>{{ report.interview.name }}</span></p>
+          <p><b>Time to Complete:</b> <span>50min</span></p>
+        </div>
+
+        <div class="company_header">
+          <p>
+            <b>Company Name:</b> <span></span>{{report.interview.company.user.name }}
+          </p>
+          <p>
+            <b>Schedule Date:</b> <span>{{report.interview.start_date }}</span>
+          </p>
+          <p>
+            <b>Candidate gmail : </b> <span>{{report.user.email }}</span>
+          </p>
+          {% comment %} <p><b>Conducted Date:</b> <span>5-May-2024</span></p> {% endcomment %}
+        </div>
+      </div>
+
+      <h2>Report Analysis</h2>
+      <div class="report_analysis_cont">
+        <div>
+          <p>
+            <b>Spoofing Detection:</b>
+            <span>{{ report.Spoofing_detection }}</span>
+          </p>
+          <p><b>Tab Changing:</b> <span>{{ report.tab_changing }}</span></p>
+          <p><b>Faces Detect:</b> <span>{{ report.copy_pasting}}</span></p>
+          
+        </div>
+
+        <div>
+          
+
+          {% comment %} <p><b>Faces Detected:</b> <span>2</span></p> {% endcomment %}
+        </div>
+      </div>
+      <hr />
+      <div class="trust_fact"><b>Trust Factor:</b> <span>7 of 10</span></div>
+
+      <h2>Technical Analysis</h2>
+      <div class="tech_analysis_header">
+        <p><b>Total Questions:</b> <span>10</span></p>
+        <p><b>Number of correct Answers:</b> <span>8</span></p>
+      </div>
+      <div class="tech_analysis_questions">
+        <p style="margin: 0 1rem"><b>Question Points</b></p>
+        <div class="tech_analysis_questions_points">
+          {% for answer in answers %}
+          <p>
+            <b>Q1 : </b><span>{{ answer.semantic_score|floatformat }}</span>
+          </p>
+
+          {% endfor %} 
+        </div>
+        <div class="total_points">
+          <b>Total Points %:</b> <span>8 of 10</span>
+        </div>
+      </div>
+
+      <div class="result_container">
+        <h2>Result</h2>
+        <div>Based on Trust factor & Number of correct Answers</div>
+        <div class="range">
+          Range: (10-13) <b><span>Fair</span></b> &nbsp; &nbsp; &nbsp; (13-15)
+          <b><span>Good</span></b> &nbsp;&nbsp;&nbsp;(15-20)
+          <b><span>Ideal</span></b>
+        </div>
+        <div class="result">
+          <b>Result:</b> <i><span>16-</span></i
+          >Ideal
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

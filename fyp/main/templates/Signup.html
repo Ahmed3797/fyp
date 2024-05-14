@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+
+    <link rel="stylesheet" href={% static 'signup.css'%}>
+    <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+    </style>
+  </head>
+
+  <body class="bg-dark">
+    <div>
+      <h1 class="text-light big-head ps-3">Interes Viewers</h1>
+    </div>
+
+
+    <div class="container centers">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-4 col-md-8 col-sm-8 m-2">
+          <div class="middle container p-4 w-100 ">
+            <div class="d-flex justify-content-center rounded">
+              <img class="img-fluid d-block" width=175px height=150px src={%static 'images\mns.png' %} alt="">
+            </div>
+
+            <form method="post">
+              {% csrf_token %}
+
+              <div class="form-group text-light w-100">
+                {{ form.name.label_tag}}
+                <br />
+
+                {{ form.name }}
+                 {% if form.name.errors %}
+                <div class="error list-unstyled text-danger">
+                  {{ form.name.errors }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="form-group text-light">
+                {{ form.email.label_tag }}
+                <br />
+                {{ form.email }} 
+                {% if form.email.errors %}
+                <div class="error list-unstyled text-danger">
+                  {{ form.email.errors }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="form-group text-light">
+                {{ form.password.label_tag }}
+                <br />
+                {{ form.password }}
+                {% if form.password.errors %}
+                <div class="error list-unstyled text-danger">
+                  {{ form.password.errors }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="form-group text-light">
+                {{ form.confirm_password.label_tag }}
+                <br />
+                {{ form.confirm_password }}
+                
+                {% if form.confirm_passsword.errors %}
+                <div class="error list-unstyled text-danger">
+                  {{ form.confirm_password.errors }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="form-group text-light">
+                {{ form.user_type.label_tag }}
+                <div class="d-flex justify-content-evenly">
+                  <div class="d-flex align-items-center rds justify-content-around align-content-end"  >
+                    {{ form.user_type.0.tag }}
+                    {{form.user_type.0.choice_label}}
+                  </div>
+                  <div class="d-flex align-items-center rds justify-content-around"   >
+                    {{ form.user_type.1.tag }} 
+                    {{form.user_type.1.choice_label}}
+                  </div>
+
+
+                </div>
+              </div> 
+
+              <div class="d-grid gap-2">
+                <button class="btn btn-light btns" type="submit">Submit</button>
+              </div>
+
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"  integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous" ></script>
+  </body>
+</html>

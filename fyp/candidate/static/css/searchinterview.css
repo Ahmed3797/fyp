@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --clr-bg-primary:#111736;
+    --clr-bg-secondary:#2A3784;
+    --clr-bg-accent:#ECFAFF;
+    --clr-f-primary:black;
+    --clr-f-secondary:white;
+    --clr-f-accent1:#111736;
+    --clr-f-accent2:grey;
+    --ff: 'Kaushan Script', cursive, san-serif;
+}
+
+.search_interview{
+background:var(--clr-bg-secondary);
+color:var(--clr-f-secondary) ;
+}
+.search_interview::placeholder{
+    color: #efefef;
+}
+
+.interview_card{
+    background: var(--clr-bg-accent);
+}
+.view_interview_detail_btn{
+    background-color:var(--clr-bg-secondary);
+}
+.interview_company_logo{
+    width: 100px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+}
+
+.drop_cv_btn{
+    background-color:var(--clr-bg-secondary);
+}
+.drop_cv_btn:hover{
+    background-color:var(--clr-bg-secondary);
+}

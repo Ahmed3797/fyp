@@ -1,0 +1,536 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InteresViewers | Interview </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href= {% static "css/interview.css" %} >
+    <style>
+      
+        body {
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none; 
+        }
+        
+        
+        body::after {
+            content: "";
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+    </head>
+
+    <body>
+       
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Read Instructions before Interview.</h5>
+          
+  
+        </div>
+        <div class="modal-body">
+          <p><b>1.</b> Don't forget to save after answering each question.  </p>
+          <p><b>2.</b> Don't Try to change or minimize tab, otherwise you will get serious panelty on time.</p>
+          <p><b>3.</b> The Longer you stay away from Interview window, Time reduction panelty will be applied more quickly.</p>
+          <p><b>4.</b> You are constantly being monitored.</p>
+          <p><b>5.</b> In case of any suspicious activity detected, you will be disqualified.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+        <h3 class="interview_header text-center  p-2 border border-2">Initial Assessment</h3>
+        <div class="interview_container container-fluid ">
+            <div class="fallback_text">!You need a Desktop Device (Laptop/PC with CAM) to Take this Interview!
+              <a href="#" class="my-3">
+                <button class="btn btn-secondary fw-bold">Go Back To Your Profile</button>
+              </a>
+                
+            </div>
+
+            <div class="row">
+                <div class="col-4 col-lg-3 p-3 interview_details">
+                    <div>
+                    <h3 class="interview_title">{{ interview.name }} </h3>
+                    <p class="interview_due_date"> <b>Due Date:</b>  <span>{{ interview.end_date }}</span></p>
+                    <p class="interview_time"><b>Time to solve:</b>  <span>50min</span> </p>
+                    </div>
+                    
+                    <div class="timer_container ">
+                      <div class="timer">
+                         <p class="countdown"> 00:00:00 </p>
+                        <svg class="circle"  xmlns="http://www.w3.org/2000/svg">
+                            <circle r="90" cx="100" cy="100" />
+                        </svg> 
+                      </div>
+                       
+                    </div>
+                    <div class="candidate_information flex flex-wrap">
+                        <a href="#" class="candidate_pic">
+                            <img src={{ user.image.url }}   alt="candidate profile">
+                        </a>
+                        
+                        <div>
+                            <a href="#">
+                                 <p class="candidate_name">{{user.user.name}}</p>
+                            </a>
+                       
+                        <span class="candidate_tagline">{{user.desc}}</span> 
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-5 col-lg-6 interview_questions_container">
+                  <form action="{% url 'save_answers' %}" method="post">
+                    {% csrf_token %}
+                    <ul>
+                        {% for question in questions %}
+                            
+                            <li>
+                                <p class="fw-bolder">{{ question.question_text }}</p>
+                                 <div>
+                                {% comment %} {% if question.image %}
+                                 <img src="{{ question.image.url }}" class="" height="100px"   alt="question_image">
+                                 {% endif %} {% endcomment %}
+    
+                                </div> 
+                                <textarea class="col-12 p-2 interview_question__answer" name="question_{{ question.id }}" cols="80" rows="3"></textarea>
+                                <input type="hidden" name="question_ids[]" value="{{ question.id }}">
+                            </li>
+                            <div class="edit_save_container">
+
+                               <button class="btn btn-warning interview_ques_save_btn" type="button">Save</button>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                    <input type="hidden" name="inters" value={{interview.id}} />
+                    <input type="hidden" id="uniqueFacesDetectedInput" name="unique_faces_detected" value="">
+                    <input type="hidden" id="spoofingCount" name="spoofing_count" value="">
+                    <input type="hidden" id="tabChanging" name="tab_changing" value="">
+                    <button type="submit" class="d-none" id="sbm">Submit Answers</button>
+                </form>
+                </div>
+                
+                <div class="col-3 interview_ques_right">
+                  <div class="webcam-container">
+                  
+                    <video id="video" autoplay style="display: none"></video>
+                  <canvas id="canvas" class="w-100" height="300" width="400"></canvas>
+                    
+                  
+                  
+                  
+                  <div class="questions_count_container">
+                       
+                    </div>
+                    <div class="question_actions">
+                       
+                      <button class="btn btn-success submit_btn " id="svm"> 
+                            Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <script src={% static "javascript/interview.js" %}>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+                        crossorigin="anonymous"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+                    <script src="{% static 'antispoofing_model/model.json' %}"></script>
+                    {% comment %} <script src="{% static 'gaze/model.json' %}"></script> {% endcomment %}
+                    
+ <script>
+       
+let hours = 0;
+let minutes = 50;
+let seconds = 40;
+let progress = 0;
+let progressEvaluation = 570 / (hours * 60 * 60 + minutes * 60 + seconds);
+let questionArray = [];
+let questionAnswerArray = [];
+
+console.log(`savedTime{{int_id}}{{user.id}}`)
+
+const getCookie = (name) => {
+  const cookieName = `${name}=`;
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(';');
+  for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(cookieName) === 0) {
+          return cookie.substring(cookieName.length, cookie.length);
+      }
+  }
+  return null;
+};
+
+const savedTime = JSON.parse(getCookie(`savedTime{{int_id}}{{user.id}}`));
+if (savedTime) {
+  console.log(`${savedTime.minutes} ${ savedTime.seconds} times saved in cookie`)
+    hours = savedTime.hours;
+    minutes = savedTime.minutes;
+    seconds = savedTime.seconds;
+}
+
+const timer = setInterval(() => {
+    
+
+//   2 minute panelty on changing tab
+    {% comment %} if (document.visibilityState === 'hidden' && minutes >=3) {
+        minutes=minutes-2; 
+        progress=progress + (progressEvaluation*120);
+        
+      } {% endcomment %}
+
+
+    if (hours == 0 && minutes == 0 && seconds == 0) {
+        circle.style.strokeDashoffset = 0;
+        //when timer ends then submission of interview happens here....
+        clearInterval(timer); 
+    } else {
+        if (seconds == 0) {
+            seconds = 59;
+            if (minutes != 0) {
+                minutes--;
+            }
+        } else {
+            progress = progress + progressEvaluation;
+            if (progress > 300) {
+                circle.style.stroke = "orange";
+            }
+            if (progress > 450) {
+                circle.style.stroke = "red";
+            }
+            circle.style.strokeDashoffset = progress;
+            seconds--;
+        }
+    }
+  
+    countdown.innerHTML =
+        formatTime(hours) +
+        " : " +
+        formatTime(minutes) +
+        " : " +
+        formatTime(seconds);
+
+      
+        
+        const setCookie = (name, value, days) => {
+          const expires = new Date();
+          expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+          document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+      };
+        setCookie(`savedTime{{int_id}}{{user.id}}`, JSON.stringify({ hours, minutes, seconds }), 10); // Set expiry to 1 day
+        if (hours==0 && minutes==0 && seconds==0)
+        {
+          svm.click()
+        }
+     
+        
+        
+}, 1000);
+
+function formatTime(time) {
+    return time < 10 ? "0" + time : time;
+}
+            
+              
+               const questions_count_contain=document.querySelector('.questions_count_container')
+    
+    {% for question in questions %}
+      {% comment %} const questionCountHTML = `<div class="ques_count">${{ forloop.counter }}</div>`; {% endcomment %}
+       questions_count_contain.insertAdjacentHTML('beforeend', `<div class="ques_count">{{ forloop.counter }}</div>`);
+    {% endfor %} 
+    
+
+  submitButton=document.getElementById("sbm");
+  svm=document.getElementById("svm");
+  const countdown = document.querySelector(".countdown");
+   const circle = document.querySelector(".circle");
+
+  svm.addEventListener("click", () => {
+    {% comment %} const submission = confirm("Are you sure you want to submit?"); {% endcomment %}
+  
+       document.getElementById('uniqueFacesDetectedInput').value = faces;
+       document.getElementById('spoofingCount').value = SpoofingCount;
+       document.getElementById('tabChanging').value = tabhidden;
+
+        submitButton.click()
+        console.log("interview submitted");
+    
+});
+
+
+
+  let video = document.getElementById("video");
+  let model;
+  let antiSpoofingModel;
+  let gazeDetectionModel;
+  let isProcessing = false;
+  let SpoofingCount=0;
+  let Spoofing_term=0;
+  let tabhidden=0;
+
+  // declare the canvas variable and setting up the context 
+
+  let canvas = document.getElementById("canvas");
+  let ctx = canvas.getContext("2d");
+
+  const accessCamera = () => {
+      navigator.mediaDevices
+          .getUserMedia({
+              video: { width: 400, height: 300 },
+              audio: false,
+          })
+          .then((stream) => {
+              video.srcObject = stream;
+          });
+  };
+
+  const loadGazeDetectionModel = async () => {
+    try {
+        // Load the gaze detection model using tf.loadLayersModel()
+        gazeDetectionModel = await tf.loadLayersModel('{% static 'gaze/model.json' %}');
+        console.log("Gaze detection model loaded successfully.");
+    } catch (error) {
+        console.error("Error loading gaze detection model:", error);
+    }
+};
+
+  const loadAntiSpoofingModel = async () => {
+
+    try {
+      // Load the TensorFlow Graph model
+      antiSpoofingModel = await tf.loadLayersModel('{% static 'antispoofing_model/model.json' %}');
+
+      console.log("Anti-spoofing model loaded successfully.");
+
+  
+  } catch (error) {
+      console.error("Error loading anti-spoofing model:", error);
+  }
+  }
+let faces=0;
+let face_count=0;
+ const detectFaces = async () => {
+    if (!isProcessing) {
+      isProcessing = true;
+
+      if(face_count>faces)
+      {
+        faces=face_count
+      }
+      face_count=0;
+
+      const predictions = await model.estimateFaces(video, false);
+      ctx.drawImage(video, 0, 0, 400, 300);
+
+      for (const prediction of predictions) {
+        face_count++;
+        const faceImage = extractFaceImage(video, prediction);
+
+        // Preprocess the face image if needed
+        const spoofProbability = await predictAntiSpoofingModel(faceImage);
+        {% comment %} const gazeClass = await predictGazeDirection(faceImage); {% endcomment %}
+
+        if (spoofProbability > 0.5) {
+          Spoofing_term++; // Increment spoofing count
+      } else {
+         Spoofing_term=0; // Reset spoofing count if not detected
+      }
+
+      if (Spoofing_term >= 10)
+      {
+        SpoofingCount++;
+        Spoofing_term=0;
+        console.log("Spoofing_detected ",SpoofingCount)
+      }
+
+        // Draw a rectangle on the canvas
+        ctx.beginPath();
+        ctx.lineWidth = "4";
+        ctx.strokeStyle = spoofProbability >  0.5 ? "red" : "green";
+        ctx.rect(
+          prediction.topLeft[0],
+          prediction.topLeft[1],
+          prediction.bottomRight[0] - prediction.topLeft[0],
+          prediction.bottomRight[1] - prediction.topLeft[1]
+        );
+        ctx.stroke();
+
+        // Draw text indicating spoof or not
+        ctx.font = "20px Arial";
+        ctx.fillStyle = spoofProbability > 0.5 ? "red" : "green";
+        ctx.fillText(
+          spoofProbability > 0.5 ? " Spoofed" : " Not Spoofed",
+          prediction.topLeft[0] + 10,
+          prediction.topLeft[1] + 30
+        );
+
+        {% comment %} ctx.font = "20px Arial";
+        ctx.fillStyle = "blue";
+        ctx.fillText(
+          `Gaze Direction: ${gazeClass}`,
+          prediction.topLeft[0] + 10,
+          prediction.topLeft[1] + 60
+        ); {% endcomment %}
+    
+      }
+
+      isProcessing = false;
+
+    }
+  };
+
+
+
+  function extractFaceImage(video, prediction) {
+    const x = prediction.topLeft[0];
+    const y = prediction.topLeft[1];
+    const width = prediction.bottomRight[0] - prediction.topLeft[0];
+    const height = prediction.bottomRight[1] - prediction.topLeft[1];
+      const faceCanvas = document.createElement('canvas');
+      const faceContext = faceCanvas.getContext('2d');
+
+      faceCanvas.width = width;
+      faceCanvas.height = height;
+
+      faceContext.drawImage(video, x, y, width, height, 0, 0, width, height);
+
+      return faceCanvas
+  }
+
+  async function predictGazeDirection(faceImage) {
+    
+    // Preprocess the face image if needed
+    const resizedFaceImage = tf.image.resizeBilinear(tf.browser.fromPixels(faceImage), [224, 224]);
+
+    // Expand dimensions to include batch dimension
+    const batchedImage = resizedFaceImage.expandDims(0);
+
+    // Normalize pixel values to range [0, 1]
+    const normalizedImage = batchedImage.div(255);
+    // Execute the gaze detection model with the face image
+    const prediction = await gazeDetectionModel.predict(normalizedImage);
+
+    // Process the prediction to extract the gaze direction
+    const gazeDirection = processGazePrediction(prediction);
+
+
+    return gazeDirection;
+}
+
+function processGazePrediction(prediction) {
+  // Find the index of the class with the highest probability
+  const probabilities = prediction.dataSync();
+    
+  // Map the probabilities to the corresponding gaze direction classes
+  const gazeDirections = ['BottomCenter', 'BottomLeft', 'BottomRight', 'MiddleLeft', 'MiddleRight', 'TopCenter', 'TopLeft', 'TopRight'];
+
+  // Create an object to store the class probabilities
+  const predictionValues = {};
+  gazeDirections.forEach((direction, index) => {
+      predictionValues[direction] = probabilities[index];
+  });
+
+
+
+  // Find the maximum value in the predictionValues object
+  const maxValue = Math.max(...Object.values(predictionValues));
+
+  // Find the index of the maximum value
+  const maxIndex = Object.keys(predictionValues).find(key => predictionValues[key] === maxValue);
+ 
+  return maxIndex;
+}
+
+
+  async function predictAntiSpoofingModel(faceImage) {
+    // Resize the face image to the expected input shape [128, 128]
+   const resizedFaceImage = tf.image.resizeBilinear(tf.browser.fromPixels(faceImage), [224, 224]);
+
+    // Expand dimensions to include batch dimension
+    const batchedImage = resizedFaceImage.expandDims(0);
+
+    // Normalize pixel values to range [0, 1]
+    const normalizedImage = batchedImage.div(255);
+
+    // Execute the anti-spoofing model with the resized image
+    const prediction = await antiSpoofingModel.predict(normalizedImage);
+
+    // Extract the predicted probability as a JavaScript value
+    const spoofProbability = prediction.dataSync()[0];
+
+
+    return spoofProbability;
+}
+ accessCamera();
+  video.addEventListener("loadeddata", async () => {
+      model = await blazeface.load(); 
+      await loadAntiSpoofingModel();
+      {% comment %} await loadGazeDetectionModel(); {% endcomment %}
+      setInterval(detectFaces,200);
+  });  
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+        // Tab is hidden (switched to another tab or minimized)
+        // Implement your logic here (e.g., pause timer, show warning)
+        tabhidden++;
+        console.log('Tab is hidden time is ',tabhidden);
+    } else {
+        
+        
+    }
+};
+
+// Add event listener for visibility change
+document.addEventListener('visibilitychange', handleVisibilityChange);
+
+const inputFields = document.querySelectorAll('input[type="text"], textarea');
+
+// Function to prevent paste events
+const preventPaste = (event) => {
+    event.preventDefault(); // Prevent the default paste behavior
+};
+
+// Add event listeners to input fields to intercept paste events
+inputFields.forEach((inputField) => {
+    inputField.addEventListener('paste', preventPaste);
+});
+
+</script>
+        
+</body>
+
+</html>

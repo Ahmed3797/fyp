@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Mynerve&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.interview_header{
+    background-color: rgb(2, 2, 65);
+    color: white;
+  
+}
+
+.interview_container{
+    min-height: 100vh;  
+   background-color: rgb(2, 2, 65);
+   color: white;
+}
+.interview_container .row{
+    display: flex ;
+    align-items:start; 
+}
+nav{
+
+     font-family: 'Kaushan Script', cursive, sans-serif;
+}
+nav a{
+    color: black !important ;
+
+}
+.interview_details,
+.interview_questions_container,
+.interview_ques_tracking{
+ min-height: 90vh;
+ max-height: auto;
+}
+.interview_questions_container{
+background-color: aliceblue;
+color: black;
+padding: .5rem;
+}
+
+.edit_save_container{
+    text-align: right;
+    padding: .5rem;
+}
+.interview_details,.interview_ques_tracking{
+    position: sticky ;
+    top:0;
+  
+}
+
+.candidate_information {
+    display: flex;
+    align-items: center;
+}
+.candidate_information{
+    position: absolute;
+    bottom: 2rem;
+}
+.candidate_information img{
+  width: 60px;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  border: 3px solid rgb(12, 12, 158);
+}
+.candidate_information a{
+    text-decoration: none;
+    color: white;
+}
+.candidate_information .candidate_name{
+    margin: 0 .7rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.candidate_information .candidate_tagline
+{
+    font-size: 0.8rem;
+    margin: 0 .7rem;
+}
+.timer_container{
+    background: aliceblue;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: inset 0px 2px 2px 2px rgb(23, 23, 148);
+}
+.timer{
+    width: 12.5rem;
+    height: 12.5rem ;
+    border-radius: 50%;
+    background-color: rgb(196, 226, 253);
+    padding: .2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+    box-shadow:  0px 0px 3px 3px rgb(179, 179, 180);
+}
+.timer .countdown{
+ 
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: black;
+  
+}
+.circle{
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: rgb(22, 42, 130);
+    stroke-width: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    stroke-dasharray: 570;
+    transition: stroke-dashoffset .5s;
+    
+   
+}
+.interview_ques_right{
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    text-align: center;
+}
+.interview_ques_right img{
+    width: 80%;
+    height: 80%;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+}
+
+.questions_count_container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: .5rem;
+    color: black;
+    background-color: rgb(1, 63, 156);
+    border-radius: 10px;
+    margin: .5rem 0;
+    height: 200px;
+    overflow-y: auto;
+  
+    
+}
+.questions_count_container .ques_count{
+    margin: .5rem 1rem;
+    border-radius: 50%;
+    background-color: aliceblue;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    box-shadow: 1px 1px 3px rgb(3, 9, 13);
+
+
+}
+
+.question_actions{
+    text-align: right;
+  
+}
+.question_actions button{
+    margin: .5rem 0;
+}
+.submit_btn{
+    width: 100%;
+    margin-top: 2rem !important;
+   
+}
+.fallback_text{
+    display: none;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-align: center;
+   
+}
+@media (max-width:768px) {
+    .fallback_text{
+        display: flex;
+    }
+    .interview_details,.interview_questions_container,.interview_ques_right{
+display: none;
+    }
+}
+
+@media (max-width:1100px) {
+    .interview_ques_right img{
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1/1;
+        margin: 0 auto;
+    }
+}

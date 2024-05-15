@@ -193,8 +193,23 @@ class Reports(TemplateView):
         context=super().get_context_data(**kwargs)
         report_id = kwargs['id']
         data=Report.objects.get(id=report_id)
+        sp=data.Spoofing_detection
+        tc=data.tab_changing
+        fd=data.copy_pasting
+
+        t_score=10-((sp+tc+(fd-1))/3)
+        context["t_score"]=t_score
 
         answers=data.user_answers.all()
+        sum=0
+        for ans in answers:
+            sum=sum+ans.semantic_score
+        
+        score=10*(sum/len(answers))
+
+        context["p_score"]=score
+        
+
         context["answers"]=answers
         context["report"]=data
         return context

@@ -3,6 +3,17 @@
 {% block css_enter %}
 
 <link rel="stylesheet" href={% static "css/searchinterview.css" %}/>
+<style>
+   input[type="file"]::file-selector-button
+    {
+        background-color:#2A3784;
+        color:white;
+        
+        
+    }
+    
+    
+</style>
 {% endblock css_enter %}
 
 
@@ -59,21 +70,29 @@
           </button>
         </div>
         <div class="modal-body">
+            <div style="min-height:80px">
             {{ interview.description }} 
+            </div>
         </div>
 <div class="d-flex align-items-center flex-column my-2">
      <img class="drop_cv" width="100px" src={% static "images/drop.png" %} "images/drop.png" alt="dropcv">
 
 
-        <button class="btn text-white drop_cv_btn my-2">Drop your Cv</button>
+        
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% comment %} {{ cv_submission_form }} {% endcomment %}
             <input type="hidden" value={{ interview.id }} name="interview_id" />
-            <input type="file" name="cv" accept=".pdf">
-            <button type="submit">Submit CV</button>
-          </form>
+            <div class="text-center">
+             <input type="file"  name="cv" accept=".pdf" class="drop_cv_input btn p-2 mt-4 rounded-2 border-0   "></br>
+             <div class="d-grid gap-2">
+            <button type="submit" id="submit_cv" class="view_interview_detail_btn text-white p-2 mt-2  rounded-2 border-0"  >Drop CV</button> 
+             </div>
+        
+        </div>
+        </form>
+        
 </div>
        
         <div class="modal-footer">
@@ -115,12 +134,18 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <script>
-                const drop_cv_input=document.querySelector(".drop_cv_input");
-                const drop_cv_btn=document.querySelector(".drop_cv_btn");
+                {% comment %} const drop_cv_input=document.querySelector(".drop_cv_input");
+                const drop_cv_btn=document.getElementById("submit_cv"); 
+                let btn=document.getElementById("submit_cv")
+               
+                
+                 btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log("hello", e);
+                    // drop_cv_input.click()
+                });  {% endcomment %}
+            
 
-                drop_cv_btn.addEventListener('click',()=>{
-                    drop_cv_input.click()
-                })
             </script>
             {% endblock Scripts %}
             

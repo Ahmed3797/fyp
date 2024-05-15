@@ -117,10 +117,7 @@
                                 <textarea class="col-12 p-2 interview_question__answer" name="question_{{ question.id }}" cols="80" rows="3"></textarea>
                                 <input type="hidden" name="question_ids[]" value="{{ question.id }}">
                             </li>
-                            <div class="edit_save_container">
-
-                               <button class="btn btn-warning interview_ques_save_btn" type="button">Save</button>
-                            </div>
+                            
                         {% endfor %}
                     </ul>
                     <input type="hidden" name="inters" value={{interview.id}} />

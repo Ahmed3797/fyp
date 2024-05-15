@@ -132,13 +132,12 @@
                             <div class="card m-1 p-0 shadow" style="width: 18rem;">
                                 <img src={% if interview.image %}{{interview.image.url}}{% else %}"assets/frontend.png"{% endif %} class="card-img-top imgs" alt="...">
                                 <div class="card-body" style="height:140px">
+                                    <div class="mt-2 d-flex justify-content-around flex-column w-100 h-100">
                                     <h5 class="card-title">{{interview.name}}</h5>
                                     <p>End Date : {{interview.end_date}} </p>
-                            
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        {% comment %} <p>Due: <span>-- -- ----</span></p>
-                                        <a href="#" class="btn btn-primary disabled px-2 ">Start</a> {% endcomment %}
                                     </div>
+                            
+                                    
                                 </div>
                             </div>
                             {% endif %}
@@ -160,11 +159,13 @@
                      {% if interview.schedulded != True %}
                         <div class="card m-1 p-0 shadow" style="width: 18rem;">
                             <img src={% if interview.image %}{{interview.image.url}}{% else %}"assets/frontend.png"{% endif %} class="card-img-top imgs" alt="...">
-                            <div class="card-body" style="height:140px">
+                            <div class="card-body" style="height:140px" >
+                                <div class="mt-2  ">
                                 <h5 class="card-title">{{interview.name}}</h5>
                         
 
-                                <a href={% url "cvs" interview.id %} class="btn btn-primary px-2 ">View CVS</a>
+                                <a href={% url "cvs" interview.id %} class="btn btn-primary px-2 mt-3 ">View CVS</a>
+                                </div>
                                 {% comment %} <div class="d-flex justify-content-between align-items-center">
                                     <p>Due: <span>-- -- ----</span></p>
                                     <a href="#" class="btn btn-primary disabled px-2 ">Start</a>
@@ -198,11 +199,13 @@
                                               
                                 <img src={% if interview.image %}{{interview.image.url}}{% else %}"assets/frontend.png"{% endif %} class="card-img-top imgs " alt="...">
                                 <div class="card-body" style="height:140px">
+                                    <div class="mt-2 d-flex justify-content-around flex-column w-100 h-100 ">
                                     <h5 class="card-title">{{interview.name}}</h5>
                                    
                                     <div class="d-flex justify-content-between align-items-center">
                                         <a href={% url "reports_view" interview.id %} class="btn btn-primary px-2 ">View Report</a>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                              {% endif %}
